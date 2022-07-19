@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+html, body {
+    position: relative;
+    min-height: 100vh;
+    background-color: #E1E8EE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.main {
+    position: relative;
+    left: 0;
+    right: 0;
+    height: 700px;
+    width: 1200px;
+}
+
+.fa-margin-td {
+    padding: 20px;
+    margin-left: 5px;
+}
+
+.fa-mragin-span {
+    margin: 5px;
+}
+
+.fa-pointer {
+    cursor: pointer;
+}
+
+.fa-pointer-delete:hover {
+    opacity: 0.7;
+    color: red;
+    cursor: pointer;
+    -webkit-transition: all .3s ease;   
+}
+
+.fa-pointer-edit:hover {
+    opacity: 0.7;
+    color: rgb(141, 93, 255);
+    cursor: pointer;
+    -webkit-transition: all .3s ease;   
+}
+
+.table-wrapper {
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 400px;
+    border-spacing: 0;
+}
+
+thead {
+    background-color: var(--second-bg);
+}
+
+tr {
+    text-align: left;
+}
+
+th,
+td {
+    text-transform: capitalize;
+    padding: 15px 10px;
+}
+
+tr:hover {
+    background-color: #a9b6d1 !important;
+    color: #ffffff !important;
+}
