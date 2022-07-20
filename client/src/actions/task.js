@@ -1,11 +1,11 @@
 import axios from 'axios'
-import {setTask, addTask, deleteTask, infoTask} from "../reducers/taskReducer";
-import {API_URL} from "../config";
+import {setTask, addTask, deleteTask, infoTask} from '../reducers/taskReducer';
+import {API_URL} from '../config';
 
 export const add = (task, description, taskItem) => {
     return async dispatch => {
 
-        if(task.trim().length === 0) return alert("Fill in the Name task field")
+        if(task.trim().length === 0) return alert('Fill in the Name task field')
         try {
             const response = await axios.post(`${API_URL}api/task/add`, {
                 task,
@@ -39,7 +39,7 @@ export const get = () => {
 export const update = (task, description, task_id) => {
     return async dispatch => {
 
-        if(task.trim().length === 0) return alert("Fill in the Name task field")
+        if(task.trim().length === 0) return alert('Fill in the Name task field')
 
         try {
             const response = await axios.post(`${API_URL}api/task/update`, {

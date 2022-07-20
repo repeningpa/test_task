@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import {store} from "./reducers";
-import { Provider } from "react-redux";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import {BrowserRouter} from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import {store} from './reducers';
+import { Provider } from 'react-redux';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import {BrowserRouter} from 'react-router-dom';
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -16,7 +16,7 @@ ReactDOM.render(
 		</React.StrictMode>
 	</Provider>,
 
-	document.getElementById("root")
+	document.getElementById('root')
 );
 
 serviceWorkerRegistration.unregister();

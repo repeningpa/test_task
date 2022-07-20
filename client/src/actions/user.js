@@ -1,6 +1,6 @@
 import axios from 'axios'
-import {setUser} from "../reducers/userReducer";
-import {API_URL} from "../config";
+import {setUser} from '../reducers/userReducer';
+import {API_URL} from '../config';
 
 export const registration = (email, password) => {
     return async dispatch => {

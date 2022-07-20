@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './main.css'
-import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../reducers/userReducer";
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from '../../reducers/userReducer';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Navbar from 'react-bootstrap/Navbar';
@@ -9,8 +9,8 @@ import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen, faUser } from '@fortawesome/free-solid-svg-icons'
-import {setInfo} from "../../actions/task";
-import { useNavigate } from "react-router-dom";
+import {setInfo} from '../../actions/task';
+import { useNavigate } from 'react-router-dom';
 import socket from '../../socket';
 
 const Main = () => {
@@ -21,19 +21,24 @@ const Main = () => {
   	const [task, setTask] = useState([])
 
   	const tableHeader = [
-		"TaskId",
-		"Name",
-		"Date",
-		"Description",
-		"Action"
+		'TaskId',
+		'Name',
+		'Date',
+		'Description',
+		'Action'
   	]
 
 	useEffect(() => {
 		socket.emit('task:get', {user_id: user.id})
 
 		socket.on('task:send', (data) => { 
+			console.log(data)
 			setTask(data)
 		})
+
+		return () => {
+			socket.removeAllListeners('task:send');
+		}
 	}, [])
 
 
@@ -61,7 +66,7 @@ const Main = () => {
 			return aggr;
 		}, []))
 
-		socket.emit('task:delete', {task_id})
+		socket.emit('task:delete', {task_id, user_id: user.id})
 	}
 
 	return (
@@ -71,11 +76,11 @@ const Main = () => {
 					<Navbar>
 						<Container>
 							<Navbar.Brand>
-								<Button variant="danger" size="sm" onClick={() => dispatch(logout())}>logout</Button>{' '}
-								<Button variant="success" size="sm" onClick={routeChange}> add task </Button>
+								<Button variant='danger' size='sm' onClick={() => dispatch(logout())}>logout</Button>{' '}
+								<Button variant='success' size='sm' onClick={routeChange}> add task </Button>
 							</Navbar.Brand>
 							<Navbar.Toggle />
-							<Navbar.Collapse className="justify-content-end">
+							<Navbar.Collapse className='justify-content-end'>
 								<Navbar.Text>
 									{user.email} <FontAwesomeIcon icon={faUser}/>
 								</Navbar.Text>
@@ -84,7 +89,7 @@ const Main = () => {
 					</Navbar> 
 				</Card.Header>
 				<Card.Body>
-					<div className="table-wrapper">
+					<div className='table-wrapper'>
 						<table>
 							<thead>
 								<tr>

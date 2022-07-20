@@ -3,11 +3,11 @@ input {
   outline: none;
   box-shadow: none;
   display: block;
-  height: 30px;
+  /* height: 30px; */
   line-height: 30px;
   padding: 8px 15px;
   border-bottom: 1px solid #eee;
-  width: 100%;
+  width: 102%;
   font-size: 12px;
 }
 
@@ -17,6 +17,13 @@ input {
 
 ::-webkit-input-placeholder {
   color: rgba(0, 0, 0, 0.4);
+}
+
+.select-error-input {
+  background-color: rgb(184, 75, 75) !important;
+  color: #ffffff !important;
+  opacity: 0.9 !important;
+  border: 1px solid rgb(184, 75, 75);
 }
 
 /*# sourceMappingURL=input.css.map */

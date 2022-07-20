@@ -1,4 +1,4 @@
-const dbCon = require("../services/dbCon")
+const dbCon = require('../services/dbCon')
 const config = require('config');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -24,11 +24,12 @@ const socketEvent = (socket) => {
                         })
                     } 
                     return socket.emit('auth:get', {
-                        error: 'Invalid password'
+                        error: 'Invalid password',
+                        errorType: 1
                     })
                 } else {
                     return socket.emit('auth:get', {
-                        error: 'User not Found'
+                        error: 'User not Found',
                     })
                 }
             }
@@ -36,21 +37,32 @@ const socketEvent = (socket) => {
     })
 
     socket.on('auth:registration', async ({email, password}) => {
-        const hashPassword = await bcrypt.hash(password, 8);
-        dbCon.get('insert into users(email, password)  values(?, ?) returning user_id as user_id', email, hashPassword, (err, result) => {
-            if (err) console.log(err)
+        dbCon.get('select u.user_id as user_id, u.password as password, u.email as email from users u where u.email = ?', email, async (err, result) => {
+            if(err) console.log(err)
             else {
-                const token = jwt.sign({id: result.user_id}, config.get('secretKey'), {expiresIn: '1h'});
-                // socket.to(email).emit('auth:get', {
-                socket.emit('auth:get', {
-                    token,
-                    user: {
-                        id: result.user_id,
-                        email: email
-                    },
-                    error: null
-                }) 
-            }
+                if(result){
+                    return socket.emit('auth:get', {
+                        error: 'User registered'
+                    })
+                } else {
+                    const hashPassword = await bcrypt.hash(password, 8);
+                    dbCon.get('insert into users(email, password)  values(?, ?) returning user_id as user_id', email, hashPassword, (err, result) => {
+                        if (err) console.log(err)
+                        else {
+                            const token = jwt.sign({id: result.user_id}, config.get('secretKey'), {expiresIn: '1h'});
+                            // socket.to(email).emit('auth:get', {
+                            socket.emit('auth:get', {
+                                token,
+                                user: {
+                                    id: result.user_id,
+                                    email: email
+                                },
+                                error: null
+                            }) 
+                        }
+                    })
+                }
+            }            
         })   
     })    
 
@@ -61,8 +73,8 @@ const socketEvent = (socket) => {
         })
     })    
 
-    socket.on('task:delete', ({task_id}) => {
-        dbCon.run('DELETE from task where task_id = ?;', task_id, (err) => {
+    socket.on('task:delete', ({task_id, user_id}) => {
+        dbCon.run('DELETE from task where task_id = ? and user_id = ?;', task_id, user_id, (err) => {
             if (err) console.log(err)
         })
     })   

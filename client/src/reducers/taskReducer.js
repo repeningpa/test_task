@@ -1,8 +1,8 @@
-const ADD_TASK = "ADD_TASK"
-const SET_TASK = "SET_TASK"
-const DELETE_TASK = "DELETE_TASK"
-const UPDATE_TASK = "UPDATE_TASK"
-const INFO_TASK = "INFO_TASK"
+const ADD_TASK = 'ADD_TASK'
+const SET_TASK = 'SET_TASK'
+const DELETE_TASK = 'DELETE_TASK'
+const UPDATE_TASK = 'UPDATE_TASK'
+const INFO_TASK = 'INFO_TASK'
 
 
 const defaultState = {

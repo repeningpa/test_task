@@ -2,7 +2,7 @@ const Router = require('express');
 const config = require('config');
 const authMiddleware = require('../middleware/auth.middleware')
 const router = new Router();
-const dbCon = require("../services/dbCon")
+const dbCon = require('../services/dbCon')
 
 router.post('/add', authMiddleware,
     async (req, res) => {
@@ -25,7 +25,7 @@ router.post('/add', authMiddleware,
 
         } catch (error) {
             console.log(error)
-            res.send({message: "server error"})
+            res.send({message: 'server error'})
         }
 });
 
@@ -40,7 +40,7 @@ router.post('/get', authMiddleware,
 
         } catch (error) {
             console.log(error)
-            res.send({message: "server error"})
+            res.send({message: 'server error'})
         }
 });
 
@@ -60,7 +60,7 @@ router.post('/delete', authMiddleware,
 
         } catch (error) {
             console.log(error)
-            res.send({message: "server error"})
+            res.send({message: 'server error'})
         }
 });
 
@@ -80,7 +80,7 @@ router.post('/update', authMiddleware,
 
         } catch (error) {
             console.log(error)
-            res.send({message: "server error"})
+            res.send({message: 'server error'})
         }
 });
 
