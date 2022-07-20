@@ -70,6 +70,10 @@ td {
     padding: 15px 10px;
 }
 
+.name-pointer-td {
+    cursor: pointer;
+}
+
 tr:hover {
     background-color: #a9b6d1 !important;
     color: #ffffff !important;

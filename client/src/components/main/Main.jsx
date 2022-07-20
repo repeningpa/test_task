@@ -32,7 +32,6 @@ const Main = () => {
 		socket.emit('task:get', {user_id: user.id})
 
 		socket.on('task:send', (data) => { 
-			console.log(data)
 			setTask(data)
 		})
 
@@ -105,7 +104,7 @@ const Main = () => {
 									task.map(item => (
 										<tr key={item.task_id} className='rows'>
 											<td>{item.task_id}</td>
-											<td>{item.task_name}</td>
+											<td className='name-pointer-td' onClick={() => routeChange(item)} >{item.task_name}</td>
 											<td>{item.date_modify}</td>
 											<td>{item.description}</td>
 											<td className='fa-margin-td'>
