@@ -9,6 +9,11 @@ import socket from '../../socket';
 
 import './task.css'
 
+const lcl = {
+	task_error: 'Fill in the Name task field',
+	task_save: 'Task Saved!'
+}
+
 const Task = () => {
     const info = useSelector(state => state.task.items)
     const user = useSelector(state => state.user.currentUser)
@@ -22,9 +27,16 @@ const Task = () => {
     }
 
     const addOrUpdate = () => { 
-        if(info.task_id == null) dispatch(add(taskName, description))
+        if(taskName.trim().length === 0) {
+			setClassAlert('alert alert-danger aler-bootst aler-bootst-show')
+			setTaskAlert(lcl.task_error) 
+			return
+		}
+
+		if(info.task_id == null) dispatch(add(taskName, description))
         else dispatch(update(taskName, description, info.task_id))
 		setClassAlert('alert alert-success aler-bootst aler-bootst-show')
+		setTaskAlert(lcl.task_save)
 		setTaskName('')
 		setDescription('')
 		info.task_id = null
@@ -33,6 +45,7 @@ const Task = () => {
 
     const [taskName, setTaskName] = useState(info.task_name == null ? '' : info.task_name, '')
     const [description, setDescription] = useState(info.description == null ? '' : info.description, '')   
+	const [taskAlert, setTaskAlert] = useState('')	 
 
     return (
         <>
@@ -55,7 +68,7 @@ const Task = () => {
 						<Button variant='primary' size='sm' onClick={routeChange}>back</Button>{' '}
 						<Button variant='success' size='sm' onClick={addOrUpdate}> save </Button>{' '}
 						<div className={classAlert} role='alert'>
-							Task Saved!
+							{taskAlert}
 						</div>
 					</div>      
 				</Card.Body>
